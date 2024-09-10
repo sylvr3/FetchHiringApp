@@ -1,6 +1,8 @@
 package com.sylvr3.fetchhiringapp
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -46,8 +48,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<MutableList<HiringListItem>>, t: Throwable) {
-                TODO("Not yet implemented")
-                //TODO print stack trace using preferred approach
+                // Log the error
+                Log.e("GET", "Request failed: ${t.message}", t)
+
+                // Show an error message to the user
+                Toast.makeText(applicationContext, "Request failed to retrieve data due to the following error: ${t.localizedMessage}", Toast.LENGTH_LONG).show()
             }
         })
     }
